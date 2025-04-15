@@ -1,0 +1,50 @@
+name: Run Postman Tests and Deploy Results
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  run-postman-tests:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+        cache: 'npm'
+
+    - name: Install Newman and reporter
+      run: |
+        npm install -g newman newman-reporter-html
+
+    - name: Create results directory
+      run: mkdir -p ./testResults
+
+    - name: Run Postman collection
+      run: |
+        newman run petstore.collection.json \
+          --reporters html,cli \
+          --reporter-html-export ./testResults/index.html \
+          --suppress-exit-code
+
+    - name: Verify report generation
+      run: |
+        echo "Contents of testResults directory:"
+        ls -la ./testResults
+        [ -f ./testResults/index.html ] || (echo "HTML report missing!"; exit 1)
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      if: always()
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./testResults
+        force_orphan: true
+        user_name: 'GitHub Actions'
+        user_email: '41898282+github-actions[bot]@users.noreply.github.com'
