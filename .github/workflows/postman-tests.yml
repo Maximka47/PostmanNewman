@@ -19,25 +19,31 @@ jobs:
         node-version: 18
         cache: 'npm'
 
-    - name: Install Newman and reporter
+    - name: Install Newman and HTML reporter
       run: |
-        npm i
+        npm install -g newman newman-reporter-html
+        npm list -g newman newman-reporter-html --depth=0
 
     - name: Create results directory
       run: mkdir -p ./testResults
 
-    - name: Run Postman collection
+    - name: Run Postman collection with HTML report
       run: |
-        newman run petstore.collection.json \
+        npx newman run petstore.collection.json \
           --reporters html,cli \
           --reporter-html-export ./testResults/index.html \
           --suppress-exit-code
+        # Fallback if HTML reporter fails
+        if [ ! -f ./testResults/index.html ]; then
+          echo "Creating fallback report..."
+          echo "<h1>Test Results</h1><pre>$(newman run petstore.collection.json --reporters cli)</pre>" > ./testResults/index.html
+        fi
 
     - name: Verify report generation
       run: |
         echo "Contents of testResults directory:"
         ls -la ./testResults
-        [ -f ./testResults/index.html ] || (echo "HTML report missing!"; exit 1)
+        [ -f ./testResults/index.html ] || exit 1
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
@@ -46,5 +52,5 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./testResults
         force_orphan: true
-        user_name: 'GitHub Actions'
+        user_name: 'GitHub Actions Bot'
         user_email: '41898282+github-actions[bot]@users.noreply.github.com'
