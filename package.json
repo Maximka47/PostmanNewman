@@ -1,0 +1,23 @@
+{
+  "name": "postmannewman",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Maximka47/PostmanNewman.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Maximka47/PostmanNewman/issues"
+  },
+  "homepage": "https://github.com/Maximka47/PostmanNewman#readme",
+  "description": "",
+  "devDependencies": {
+    "newman": "^4.6.1",
+    "newman-reporter-html": "^1.0.5"
+  }
+}
