@@ -1,7 +1,5 @@
 # Postman Newman API Test Automation
 
-![GitHub Actions]((https://maximka47.github.io/PostmanNewman/))
-
 This repository contains automated API tests for the Petstore API using Postman collections and Newman, with automated test reporting via GitHub Pages.
 
 ## Features
