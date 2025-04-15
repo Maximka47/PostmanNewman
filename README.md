@@ -1,3 +1,11 @@
+# Postman Newman API Test Automation
+
+![GitHub Actions](https://github.com/Maximka47/PostmanNewman/workflows/Run%20Postman%20Tests/badge.svg)
+
+This repository contains automated API tests for the Petstore API using Postman collections and Newman, with automated test reporting via GitHub Pages.
+
+## Features
+
 - Automated API testing using Postman collections
 - CI/CD pipeline with GitHub Actions
 - HTML test reports published to GitHub Pages
