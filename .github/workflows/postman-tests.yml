@@ -28,7 +28,7 @@ jobs:
 
     - name: Run YAML server in background
       run: |
-        nohup npm run turn-on-on-api &
+        nohup npm run turn-on-api &
         echo "Waiting for server to start..."
         sleep 5
         curl -f http://localhost:3000 || { echo "Server failed to start!"; exit 1; }
