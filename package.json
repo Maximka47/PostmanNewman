@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "turn-on-api": "cp mockApi/db_back_up.yaml mockApi/db_stage.yaml && npx yaml-server --hotReload=off --port 3000 --database ./mockApi/db_stage.yaml --quiet"
+    "turn-on-api": "cp mockApi/db_back_up.yaml mockApi/db_stage.yaml && npx yaml-server --hotReload=off --port 3000 --database ./mockApi/db_stage.yaml"
   },
   "repository": {
     "type": "git",

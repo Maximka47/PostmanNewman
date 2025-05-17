@@ -30,7 +30,8 @@ jobs:
       run: |
         nohup npm run turn-on-api > server.log 2>&1 &
         sleep 3
-        npx wait-on http://localhost:3000 --timeout 10000
+        cat server.log || true
+        npx wait-on http://localhost:3000 --timeout 15000
 
     - name: Create results directory
       run: mkdir -p ./testResults
