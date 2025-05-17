@@ -26,17 +26,11 @@ jobs:
       run: |
         sudo lsof -ti :3000 | xargs --no-run-if-empty kill -9
 
-    - name: Run YAML server in background
-      uses: miguelteixeiraa/action-run-in-background@v1
-      with:
-        script: |
-          npm run turn-on-api &
-        readiness-script: |
-          # Wait for the server to start
-          echo "Waiting for server to start..."
-          sleep 5
-          curl -f http://localhost:3000 || { echo "Server failed to start!"; exit 1; }
-          echo "Server is up and running!"
+    - name: Start mock API server in background
+      run: |
+        npm run turn-on-api > server.log 2>&1 &
+        npx wait-on http://localhost:3000
+
     - name: Create results directory
       run: mkdir -p ./testResults
 
