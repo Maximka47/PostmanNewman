@@ -22,9 +22,10 @@ jobs:
     - name: Install Newman and HTML reporter
       run: |
         npm i
-    - name: Run yaml server
+    - name: Run YAML server in background
       run: |
-        npm run turn-on-api
+        npm run turn-on-api & 
+        npx wait-on http://localhost:3000
 
     - name: Create results directory
       run: mkdir -p ./testResults
