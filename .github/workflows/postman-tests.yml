@@ -28,8 +28,9 @@ jobs:
 
     - name: Start mock API server in background
       run: |
-        npm run turn-on-api > server.log 2>&1 &
-        npx wait-on http://localhost:3000
+        nohup npm run turn-on-api > server.log 2>&1 &
+        sleep
+        npx wait-on http://localhost:3000 --timeout 10000
 
     - name: Create results directory
       run: mkdir -p ./testResults
