@@ -28,11 +28,11 @@ jobs:
 
     - name: Run YAML server in background
       run: |
-        npm run turn-on-api & 
-        npx wait-on http://localhost:3000
-
-    - name: Confirm server is up
-      run: curl -I http://localhost:3000
+        nohup npm run turn-on-on-api &
+        echo "Waiting for server to start..."
+        sleep 5
+        curl -f http://localhost:3000 || { echo "Server failed to start!"; exit 1; }
+        echo "Server is up and running!"
 
     - name: Create results directory
       run: mkdir -p ./testResults
