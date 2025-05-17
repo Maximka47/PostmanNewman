@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4be5eeef-591c-43ca-b72f-6c01f5cbd433",
+		"_postman_id": "c786340b-5f52-475c-ade4-59a13fda1493",
 		"name": "store",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "21530862"
@@ -111,8 +111,8 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200\", () => {\r",
-									"    pm.response.to.have.status(200);\r",
+									"pm.test(\"Status code is 201\", () => {\r",
+									"    pm.response.to.have.status(201);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Response time is below 200ms\", () => {\r",
@@ -246,11 +246,12 @@
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 200\", () => {\r",
-									"    pm.response.to.have.status(200);\r",
+									"  pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is below 200ms\", () => {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"pm.test(\"Response is an array\", () => {\r",
+									"  const data = pm.response.json();\r",
+									"  pm.expect(data).to.be.an(\"array\");\r",
 									"});"
 								],
 								"type": "text/javascript",
@@ -316,8 +317,8 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200\", () => {\r",
-									"    pm.response.to.have.status(200);\r",
+									"pm.test(\"Status code is 201\", () => {\r",
+									"    pm.response.to.have.status(201);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Response time is below 200ms\", () => {\r",
@@ -517,8 +518,8 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200\", () => {\r",
-									"    pm.response.to.have.status(200);\r",
+									"pm.test(\"Status code is 201\", () => {\r",
+									"    pm.response.to.have.status(201);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Response time is below 200ms\", () => {\r",
@@ -647,6 +648,107 @@
 							"path": [
 								"users",
 								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Paginated users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const users = pm.response.json();\r",
+									"\r",
+									"pm.test(\"At most 2 users are returned\", () => {\r",
+									"  pm.expect(users.length).to.be.at.most(2);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users?page=1&pageSize=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sorted users ASC",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const users = pm.response.json();\r",
+									"const names = users.map(u => u.firstName);\r",
+									"const sorted = [...names].sort();\r",
+									"\r",
+									"pm.test(\"Users are sorted by firstName ascending\", () => {\r",
+									"  pm.expect(names).to.eql(sorted);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users?sortOrder=ASC&sortKey=firstName",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "sortOrder",
+									"value": "ASC"
+								},
+								{
+									"key": "sortKey",
+									"value": "firstName"
+								}
 							]
 						}
 					},

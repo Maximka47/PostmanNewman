@@ -28,7 +28,7 @@ jobs:
 
     - name: Run Postman collection with HTML report
       run: |
-        npx newman run petstore.collection.json \
+        npx newman run store.collection.json \
           --reporters html,cli \
           --reporter-html-export ./testResults/index.html \
           --suppress-exit-code
