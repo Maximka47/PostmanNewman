@@ -22,10 +22,17 @@ jobs:
     - name: Install Newman and HTML reporter
       run: |
         npm i
+    - name: Free up port 3000
+      run: |
+        sudo lsof -ti :3000 | xargs --no-run-if-empty kill -9
+
     - name: Run YAML server in background
       run: |
         npm run turn-on-api & 
         npx wait-on http://localhost:3000
+
+    - name: Confirm server is up
+      run: curl -I http://localhost:3000
 
     - name: Create results directory
       run: mkdir -p ./testResults

@@ -17,11 +17,6 @@ products:
     price: 30
     sku: 999921312423312
     description: awesome
-  - name: orange
-    price: 8
-    sku: 123321123
-    description: wouh
-    id: 5
 orders:
   - id: 1
     name: order1
@@ -32,18 +27,6 @@ orders:
   - id: 3
     name: order2
     sku: 999921312423312
-  - name: order5
-    sku: 123425445656765
-    id: 5
-  - name: order5
-    sku: 123425445656765
-    id: 6
-  - name: order5
-    sku: 123425445656765
-    id: 6
-  - name: order5
-    sku: 123425445656765
-    id: 7
 users:
   - id: 1
     firstName: Alice
@@ -99,6 +82,15 @@ users:
     signUpDate: 2019-08-24
     status: active
     level: consumer
+  - id: 7
+    firstName: saske
+    lastName: Smith
+    email: saske.smith@gmail.com
+    dateOfBirth: 1997-10-31
+    emailVerified: true
+    signUpDate: 2019-08-24
+    status: active
+    level: consumer
   - id: 8
     firstName: kukareku
     lastName: kukareku
@@ -109,56 +101,11 @@ users:
     status: active
     level: consumer
   - id: 9
-    firstName: Ilon
-    lastName: Mask
-    email: ilon.mask@gmail.com
-    dateOfBirth: 2001-10-99
-    emailVerified: true
+    firstName: asdasd
+    lastName: asd
+    email: asdasd.smith@gmail.com
+    dateOfBirth: 1997-10-31
+    emailVerified: false
     signUpDate: 2019-08-24
     status: active
-    level: lord
-  - firstName: Dream
-    lastName: Real
-    email: dream.real@gmail.com
-    dateOfBirth: 2001-10-99
-    emailVerified: true
-    signUpDate: 2019-08-24
-    status: active
-    level: lord
-    id: 10
-  - firstName: Dream
-    lastName: Real
-    email: dream.real@gmail.com
-    dateOfBirth: 2001-10-99
-    emailVerified: true
-    signUpDate: 2019-08-24
-    status: active
-    level: lord
-    id: 10
-  - firstName: Dream
-    lastName: Real
-    email: dream.real@gmail.com
-    dateOfBirth: 2001-10-99
-    emailVerified: true
-    signUpDate: 2019-08-24
-    status: active
-    level: lord
-    id: 11
-  - firstName: Dream
-    lastName: Real
-    email: dream.real@gmail.com
-    dateOfBirth: 2001-10-99
-    emailVerified: true
-    signUpDate: 2019-08-24
-    status: active
-    level: lord
-    id: 12
-  - firstName: Dream
-    lastName: Real
-    email: dream.real@gmail.com
-    dateOfBirth: 2001-10-99
-    emailVerified: true
-    signUpDate: 2019-08-24
-    status: active
-    level: lord
-    id: 13
+    level: consumer
